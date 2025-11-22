@@ -19,4 +19,12 @@ app.get('/update', (req, res)=>{
     res.render('update')
 })
 
+app.post('/update', (req, res)=>{
+    res.redirect('/')
+})
+
+app.post('/add', (req, res)=>{
+    res.redirect('/')
+})
+
 app.listen(3200, ()=>console.log('Server is running on Port'))
