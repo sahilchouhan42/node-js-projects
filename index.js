@@ -20,8 +20,12 @@ const connection = async ()=>{
 
 app.use(express.urlencoded({extended: false}))
 
-app.get('/', (req, res)=>{
-    res.render('list')
+app.get('/', async (req, res)=>{
+    const db = await connection();
+    const collection = db.collection(collectionName);
+    const result = await collection.find().toArray();
+    console.log(result)
+    res.render('list', {result})
 })
 
 app.get('/add', (req, res)=>{
