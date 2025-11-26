@@ -20,6 +20,8 @@
                         <%= result[task].description %>
                     </div>
                     <a class="delete-item" href="/delete/<%= result[task]._id %>">Delete</a>
+                    <a class="update-item" href="/update/<%= result[task]._id %>">Update</a>
+
                 </li>
                 <% } %>
         </ul>

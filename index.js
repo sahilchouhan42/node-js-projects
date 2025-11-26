@@ -24,7 +24,7 @@ app.get('/', async (req, res)=>{
     const db = await connection();
     const collection = db.collection(collectionName);
     const result = await collection.find().toArray();
-    console.log(result)
+    // console.log(result)
     res.render('list', {result})
 })
 
@@ -60,6 +60,19 @@ app.get('/delete/:id', async (req, res)=>{
     } else{
         res.send("Some Error")
     }
+})
+
+app.get('/update/:id',async (req, res)=>{
+    const db = await connection()
+    const collection = db.collection(collectionName)
+    const result = await collection.findOne({_id: new ObjectId(req.params.id)})
+    console.log(result)
+    if(result){
+        res.render('update', {result})
+    } else{
+        res.send("Some Error")
+    }
+    // res.send('Ok')
 })
 
 app.listen(3200, ()=>console.log('Server is running on Port'))

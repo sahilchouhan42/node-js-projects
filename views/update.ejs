@@ -11,12 +11,10 @@
     <div class="container">
         <h1>Update Task</h1>
         <form class="todo-form" action="/update" method="post">
-            <input class="input" type="text" placeholder="Enter Task Title" name="title">
+            <input class="input" value=" <%= result.title %> " type="text" placeholder="Enter Task Title" name="title">
             <br/>
             <br/>
-            <textarea class="input" name="description" id="">
-
-            </textarea>
+            <textarea class="input" name="description" id=""><%= result.description %></textarea>
             <br>
             <br>
             <button class="btn">Update Task</button>
