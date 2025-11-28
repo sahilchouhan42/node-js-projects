@@ -10,7 +10,7 @@
     <%- include("navbar") %>
     <div class="container">
         <h1>Update Task</h1>
-        <form class="todo-form" action="/update" method="post">
+        <form class="todo-form" action="/update/<%= result._id %>" method="post">
             <input class="input" value=" <%= result.title %> " type="text" placeholder="Enter Task Title" name="title">
             <br/>
             <br/>

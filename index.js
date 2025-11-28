@@ -75,4 +75,19 @@ app.get('/update/:id',async (req, res)=>{
     // res.send('Ok')
 })
 
+app.post('/update/:id',async (req, res)=>{
+    const db = await connection()
+    const collection = db.collection(collectionName)
+    const filter = {_id: new ObjectId(req.params.id)}
+    const updateData = {$set:{title:req.body.title, description:req.body.description}}
+    const result = await collection.updateOne(filter, updateData)
+    console.log(result)
+    if(result){
+        res.redirect('/')
+    } else{
+        res.send("Some Error")
+    }
+    // res.send('Ok')
+})
+
 app.listen(3200, ()=>console.log('Server is running on Port'))
