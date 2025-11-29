@@ -81,13 +81,34 @@ app.post('/update/:id',async (req, res)=>{
     const filter = {_id: new ObjectId(req.params.id)}
     const updateData = {$set:{title:req.body.title, description:req.body.description}}
     const result = await collection.updateOne(filter, updateData)
-    console.log(result)
+    // console.log(result)
     if(result){
         res.redirect('/')
     } else{
         res.send("Some Error")
     }
     // res.send('Ok')
+})
+
+app.post('/multi-delete', async (req, res)=>{
+    const db = await connection()
+    const collection = db.collection(collectionName)
+    console.log(req.body.selectedTask)
+
+    let selectedTask = undefined;
+    if(Array.isArray(req.body.selectedTask)){
+        selectedTask = req.body.selectedTask.map((id)=> new ObjectId(id))
+    } else{
+        selectedTask = [new ObjectId(req.body.selectedTask)]
+    }
+    console.log(selectedTask)
+    const result = await collection.deleteMany({_id:{$in: selectedTask}})
+    console.log(result)
+    if(result){
+        res.redirect('/')
+    } else{
+        res.send('Some erroe')
+    }
 })
 
 app.listen(3200, ()=>console.log('Server is running on Port'))
